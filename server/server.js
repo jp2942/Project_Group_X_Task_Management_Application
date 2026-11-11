@@ -16,6 +16,19 @@ app.use(cors());
 // Parse incoming JSON request bodies
 app.use(express.json());
 
+// Root API overview endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'TaskHive Backend API is running.',
+    endpoints: {
+      health: '/api/health',
+      tasks: '/api/tasks',
+      users: '/api/users',
+    },
+  });
+});
+
 // Server and PostgreSQL database health check endpoint
 app.get('/api/health', async (req, res, next) => {
   try {
